@@ -1,5 +1,3 @@
-# "__label__1 corresponds to 1- and 2-star reviews, and __label__2 corresponds to 4- and 5-star reviews."  
-
 def load(path):
     import bz2
     import zipfile 
