@@ -6,7 +6,7 @@ def load(path):
     utf8reader = codecs.getreader('utf-8')
     tar = tarfile.open(path, "r:gz")
 
-    data = []
+    data = list()
 
     for name in tar.getmembers():
 
@@ -28,6 +28,6 @@ def load(path):
 
             fp = utf8reader(tar.extractfile(name))
             
-            data.append({'input': fp.read(), 'label': label})
+            data.append({"input": fp.read(), "label": label})
     
     return data
