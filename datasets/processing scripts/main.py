@@ -1,8 +1,6 @@
-import GOP_debate
+import twitter_airline
 
-path = "C:/Users/The Baboon/Downloads/datasets/first-gop-debate-twitter-sentiment.zip"
+path = "C:/Users/The Baboon/Downloads/datasets/twitter-airline-sentiment.zip"
 
-# GOP_debate.load(path)
-
-for s in GOP_debate.load(path)[:5]:
+for s in twitter_airline.load(path)[:5]:
     print(s)
