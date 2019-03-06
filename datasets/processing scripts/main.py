@@ -1,6 +1,7 @@
-import twitter_airline
+import sentiment140
 
-path = "C:/Users/The Baboon/Downloads/datasets/twitter-airline-sentiment.zip"
+path = "C:/Users/The Baboon/Downloads/datasets/trainingandtestdata.zip"
 
-for s in twitter_airline.load(path)[:5]:
+
+for s in sentiment140.load(path)[:5]:
     print(s)
