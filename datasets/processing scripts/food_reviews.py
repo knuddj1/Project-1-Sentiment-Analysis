@@ -10,7 +10,7 @@ def load(path):
     df = pd.read_csv(archive.open('Reviews.csv'))
 
     query = df['Score'].isin(score_converter.keys())
-    result = df.loc[query][['Score', 'Text']]
+    result = df.loc[query]
 
     for _, row in result.iterrows():  
         data.append({"input": row['Text'], "label": score_converter[row['Score']]})
