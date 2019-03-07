@@ -1,16 +1,15 @@
 import json
-import urllib
+import os
 
-path = "data_configs1.json"
+path = "data_configs.json"
 
 configs = json.load(open(path))
 
 for dataset_name in configs.keys():
-    change = False
     data_config = configs[dataset_name]
-    if data_config['use']:
-        data_config['path'] = "Test"
-        change = True
-    if change:
-        json.dump(configs, open(path, "w"), indent=4)
-
+    if data_config["use"]:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(dataset_name, data_config["loading_script"])
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        module.load(data_config["dataset_path"])

@@ -27,8 +27,8 @@
         "extra_params": null
     },
     "Twitter Airline": {
-        "use": false,
-        "path": null,
+        "use": true,
+        "path": "H:/Project-1-Sentiment-Analysis/datasets/processing scripts/twitter_airline.py",
         "extra_params": {
             "confidence_min": 0.0
         }
