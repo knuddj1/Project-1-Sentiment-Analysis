@@ -1,34 +1,40 @@
 {
     "Amazon Reviews": {
         "use": false,
-        "path": null,
+        "dataset_path": null,
+        "loading_script": null,
         "extra_params": null
     },
     "Food Reviews": {
         "use": false,
-        "path": null,
+        "dataset_path": null,
+        "loading_script": null,
         "extra_params": null
     },
     "Twitter GOP Debate": {
         "use": false,
-        "path": null,
+        "dataset_path": null,
+        "loading_script": null,
         "extra_params": {
             "confidence_min": 0.0
         }
     },
     "IMDB": {
         "use": false,
-        "path": null,
+        "dataset_path": null,
+        "loading_script": null,
         "extra_params": null
     },
     "Sentiment140": {
         "use": false,
-        "path": null,
+        "dataset_path": null,
+        "loading_script": null,
         "extra_params": null
     },
     "Twitter Airline": {
-        "use": true,
-        "path": "H:/Project-1-Sentiment-Analysis/datasets/processing scripts/twitter_airline.py",
+        "use": false,
+        "dataset_path": null,
+        "loading_script": null,
         "extra_params": {
             "confidence_min": 0.0
         }
