@@ -12,8 +12,8 @@ def load(path):
 
         df = pd.read_csv(
             archive.open(csvfile),
-            header = None,
-            names = ('target', 'ids', 'date', 'flag', 'user', 'text'),
+            header=None,
+            names=('target', 'ids', 'date', 'flag', 'user', 'text'),
             encoding="ISO-8859-1",
             error_bad_lines=False
         )

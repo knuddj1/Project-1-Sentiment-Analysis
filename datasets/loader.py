@@ -1,7 +1,7 @@
 import json
 import importlib.util
 import os
-from . import loader_config
+from . import settings
 
 
 def load_dataset(path, config):
@@ -37,12 +37,12 @@ def get_data():
         data_config = configs[dataset_name]
 
         if data_config["use"]:
-            formated_dataset_path = os.path.join(formatted_dir,'{}.{}'.format(dataset_name, loader_config.DATASET_FILE_EXTENSION))
+            formatted_dataset_path = os.path.join(formatted_dir,'{}.{}'.format(dataset_name, settings.DATASET_FILE_EXTENSION))
 
-            if os.path.exists(formated_dataset_path):
+            if os.path.exists(formatted_dataset_path):
                 print("Already exists")
             else:
-                with open(formated_dataset_path, 'w') as f:
+                with open(formatted_dataset_path, 'w') as f:
                     f.write("worked")
                 load_dataset(loading_scripts_dir, data_config)
 
