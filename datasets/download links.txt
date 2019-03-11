@@ -1,25 +1,29 @@
-Amazon Fine Food Reviews - https://www.kaggle.com/snap/amazon-fine-food-reviews
+Amazon Fine Food Reviews - https://www.kaggle.com/snap/amazon-fine-food-reviews/downloads/amazon-fine-food-reviews.zip/2
 
 
-Amazon Reviews for Sentiment Analysis - https://www.kaggle.com/bittlingmayer/amazonreviews
+Amazon Reviews for Sentiment Analysis - https://www.kaggle.com/bittlingmayer/amazonreviews/downloads/amazonreviews.zip/2
+
+
+Twitter US Airline Sentiment - https://www.kaggle.com/crowdflower/twitter-airline-sentiment/downloads/twitter-airline-sentiment.zip/2
+
+
+First GOP Debate Twitter Sentiment - https://www.kaggle.com/crowdflower/first-gop-debate-twitter-sentiment/downloads/first-gop-debate-twitter-sentiment.zip/2
+
+
+Sentiment140 dataset - https://www.kaggle.com/kazanova/sentiment140/downloads/sentiment140.zip/2
+
+
+Large Movie Review Dataset v1.0 - http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz
+
+
+
+
+##################### CURRENTLY NOT USED ##########################
+
+Amazon product data - http://jmcauley.ucsd.edu/data/amazon/
 
 
 Yelp Dataset - https://www.kaggle.com/yelp-dataset/yelp-dataset
-
-
-Twitter US Airline Sentiment - https://www.kaggle.com/crowdflower/twitter-airline-sentiment
-
-
-First GOP Debate Twitter Sentiment - https://www.kaggle.com/crowdflower/first-gop-debate-twitter-sentiment
-
-
-Sentiment140 dataset - https://www.kaggle.com/kazanova/sentiment140
-
-
-Large Movie Review Dataset v1.0 - http://ai.stanford.edu/~amaas/data/sentiment/
-
-
-Amazon product data - http://jmcauley.ucsd.edu/data/amazon/
 
 
 hand annotated - https://docs.google.com/spreadsheets/d/1_KPk66j24N7sTi_1h5cgchNFDChDGHuRWUO7ur5lJIE/edit#gid=0

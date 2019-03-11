@@ -1,41 +1,41 @@
 {
-    "Amazon Reviews": {
+    "Amazon_Reviews": {
         "use": true,
-        "dataset_path": null,
+        "dataset_path": "C:/Users/The Baboon/Desktop/BIT Y3 SM1/Project 1/datasets/amazonreviews.zip",
         "loading_script": "amazon_reviews.py",
-        "extra_params": null
+        "other_params": null
     },
-    "Food Reviews": {
+    "Food_Reviews": {
         "use": true,
-        "dataset_path": null,
+        "dataset_path": "C:/Users/The Baboon/Desktop/BIT Y3 SM1/Project 1/datasets/amazon-fine-food-reviews.zip",
         "loading_script": "food_reviews.py",
-        "extra_params": null
+        "other_params": null
     },
-    "Twitter GOP Debate": {
-        "use": false,
-        "dataset_path": null,
+    "Twitter_GOP_Debate": {
+        "use": true,
+        "dataset_path": "C:/Users/The Baboon/Desktop/BIT Y3 SM1/Project 1/datasets/first-gop-debate-twitter-sentiment.zip",
         "loading_script": "GOP_debate.py",
-        "extra_params": {
+        "other_params": {
             "confidence_min": 0.0
         }
     },
     "IMDB": {
-        "use": false,
-        "dataset_path": null,
+        "use": true,
+        "dataset_path": "C:/Users/The Baboon/Desktop/BIT Y3 SM1/Project 1/datasets/aclImdb_v1.tar.gz",
         "loading_script": "imdb.py",
-        "extra_params": null
+        "other_params": null
     },
     "Sentiment140": {
-        "use": false,
-        "dataset_path": null,
+        "use": true,
+        "dataset_path": "C:/Users/The Baboon/Desktop/BIT Y3 SM1/Project 1/datasets/sentiment140.zip",
         "loading_script": "sentiment140.py",
-        "extra_params": null
+        "other_params": null
     },
-    "Twitter Airline": {
-        "use": false,
-        "dataset_path": null,
+    "Twitter_Airline": {
+        "use": true,
+        "dataset_path": "C:/Users/The Baboon/Desktop/BIT Y3 SM1/Project 1/datasets/twitter-airline-sentiment.zip",
         "loading_script": "twitter_airline.py",
-        "extra_params": {
+        "other_params": {
             "confidence_min": 0.0
         }
     }
