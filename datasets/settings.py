@@ -6,14 +6,18 @@ TODO
 DATASET_NAME = ""
 
 
-# Path to the datasets configuration file
-DATA_CONFIG_PATH = ""
-
-
 # File type to save datasets under
 # One of either 'csv' or 'json'
 DATASET_FILE_EXTENSION = "csv"
 
+
+# Save file with information about each dataset
+SAVE_STATS = True
+
+
+# Location dataset information will be saved
+# Only used if SAVE_STATS=True
+STATS_SAVE_DIR = None
 
 # Method in which final dataset will be established
 #    ->  when UNIFORM=FALSE all records from each dataset are combined
