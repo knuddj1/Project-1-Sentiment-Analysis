@@ -14,17 +14,7 @@ def save_stats(dataset_stats, save_file):
         writer = csv.DictWriter(f, fieldnames=dataset_stats[0].keys())
         writer.writeheader()
         writer.writerows(dataset_stats)
-
-
-# def prepare_stats(dataset_stats):
-#     """"
-#     dataset_stats : string -
-#     save_file : string - location to save dataset_stats
-#     --------------------------------------------------------------------
-#     saves dataset statistics to a text file
-#     """
-#     label_converter = {-1: "negative", 0: "neutral", 1: "positive"}
-
+        
 
 def gather_dataset_stats(dataset, dataset_name):
     """"
