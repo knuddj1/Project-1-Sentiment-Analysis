@@ -1,56 +1,70 @@
+import statistics
+import csv
+
+
 def save_stats(dataset_stats, save_file):
-    with open(save_file, "w") as f:
-        f.writelines(dataset_stats)
+    """"
+    dataset_stats : list(dict) - Each list item is a dict of all dataset statistics
+    save_file : string - location to save dataset_stats
+    --------------------------------------------------------------------
+    saves dataset statistics to a csv file
+    """
+
+    with open(save_file, mode="w", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=dataset_stats[0].keys())
+        writer.writeheader()
+        writer.writerows(dataset_stats)
 
 
-
-# def prepare_stats(stats):
-#     counts_converter = {-1: "negative", 0: "neutral", 1: "positive"}
-#
-#     dataset_stats = ""
-#
-#     dataset_stats += "Average input length = {} characters \n".format(avg_len)
-#     dataset_stats += "Min input length = {} characters \n".format(min_len)
-#     dataset_stats += "Max input length = {} characters \n".format(max_len)
-#     dataset_stats += "\n"
-#     for k, v in label_counts.items():
-#         dataset_stats += "Total {} samples: {} \n".format(counts_converter[k], v)
-#
-#     save_stats(dataset_stats, save_file)
-#     print(total_counts)
-#     print(global_avg / len(sub_sets))
+# def prepare_stats(dataset_stats):
+#     """"
+#     dataset_stats : string -
+#     save_file : string - location to save dataset_stats
+#     --------------------------------------------------------------------
+#     saves dataset statistics to a text file
+#     """
+#     label_converter = {-1: "negative", 0: "neutral", 1: "positive"}
 
 
-def gather_dataset_stats(dataset):
-
-    lens = [len(s["input"]) for s in dataset]
+def gather_dataset_stats(dataset, dataset_name):
+    """"
+    dataset : dict - singular dataset in format {"input":x,"label":x}
+    --------------------------------------------------------------------
+    output : dict - statistics of dataset
+    --------------------------------------------------------------------
+    TODO
+    """
+    lens = sorted([len(s["input"]) for s in dataset])
     labels = [s["label"] for s in dataset]
 
     return {
-        "n_neg": len([None for i in labels if i == -1]),
-        "n_neut": len([None for i in labels if i == 0]),
-        "n_pos": len([None for i in labels if i == 1]),
-        "min_len": min(lens),
-        "max_len": max(lens),
-        "avg_len": sum(lens) // len(dataset)
+        "dataset": dataset_name,
+        "negative samples": len([None for i in labels if i == -1]),
+        "neutral samples": len([None for i in labels if i == 0]),
+        "positive samples": len([None for i in labels if i == 1]),
+        "total samples": len(dataset),
+        "min sample length": lens[0],
+        "max sample length": lens[-1],
+        "samples length arithmetic mean": statistics.mean(lens),
+        "samples length harmonic_mean": statistics.harmonic_mean(lens),
+        "median sample length": statistics.median(lens),
+        "sample lengths mode": statistics.mode(lens),
+        "sample lengths stdev": statistics.stdev(lens),
+        "sample lengths variance": statistics.variance(lens)
+
     }
 
 
 def generate_stats(datasets):
-    sub_sets = datasets.keys()
+    print("Generating statistics for dataset..")
 
-    total_counts = {-1: 0, 0: 0, 1: 0}
-    global_avg = 0
+    save_file = "dataset statistics.csv"
+    subset_names = datasets.keys()
 
-    dataset_stats = dict.fromkeys(sub_sets)
+    dataset_stats = [gather_dataset_stats(datasets[dname], dname) for dname in subset_names]
+    save_stats(dataset_stats, save_file)
 
-    for dname in sub_sets:
-        dataset_stats[dname] = gather_dataset_stats(datasets[dname])
-
-    import json
-    with open("test.json", "w") as f:
-        json.dump(dataset_stats, f, indent=4)
-
+    print("Finished! Statistics saved as '%s'" % save_file)
 
 
 

@@ -3,13 +3,16 @@ import csv
 import importlib.util
 import os
 from datasets.settings import *
+from . import data_configs
 
 
 def extract_dataset(path, config):
     """
     path : string - the current location of the loader script. 
     config : dict - dataset configuration file
-
+    --------------------------------------------------------------------
+    output: dict - singular dataset in format {"input":x,"label":x}
+    --------------------------------------------------------------------
     Uses the loading script from the supplied data config to retrieve
     the dataset from its location.
     dataset returned from loading script should be a list of dictionaries
@@ -35,7 +38,7 @@ def save_to_csv(save_path, dataset):
     """
     save_path : string - absoulute path to save dataset
     dataset : list(dict)  
-
+    --------------------------------------------------------------------
     Saves the dataset to csv.
     Dataset should be a list of dictionaries with keys:
         -> input
@@ -51,7 +54,7 @@ def save_to_json(save_path, dataset):
     """
     save_path : string - absoulute path to save dataset
     dataset : list(dict)  
-
+    --------------------------------------------------------------------
     Saves the dataset to json.
     Dataset should be a list of dictionaries with keys:
         -> input
@@ -66,6 +69,9 @@ def format_dataset(data_config, script_dir, formatted_save_dir):
     data_config : dict - loading information for a dataset
     script_dir : string - location of dataset loading scripts
     formatted_save_dir : string - directory to save formatted dataset in
+    --------------------------------------------------------------------
+    output : dict - singular dataset in format {"input":x,"label":x}
+    --------------------------------------------------------------------
     """
     data = extract_dataset(script_dir, data_config)
 
@@ -81,7 +87,9 @@ def format_dataset(data_config, script_dir, formatted_save_dir):
 def retrieve_dataset(path):
     """
     path : string - path to formatted dataset
-
+    --------------------------------------------------------------------
+    output : singular dataset in format {"input":x,"label":x}
+    --------------------------------------------------------------------
     retrieves a preformatted dataset
     """
     try:
@@ -98,13 +106,13 @@ def retrieve_dataset(path):
 
 def load_data():
     """
+    output : dict - All datasets concatenated in format {dataset_name:{"input":x,"label":x}}
+    --------------------------------------------------------------------
     TODO
-
     """
     current_dir = os.path.dirname(__file__)
-    config_path = os.path.join(current_dir, "data_configs.json")
     
-    configs = json.load(open(config_path))
+    configs = data_configs.CONFIGS
 
     dataset = dict()
 
