@@ -1,6 +1,5 @@
 from . import load
 from . import stats
-import time
 
 
 def run():

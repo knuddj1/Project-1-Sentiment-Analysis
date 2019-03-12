@@ -10,11 +10,10 @@ Twitter US Airline Sentiment - https://www.kaggle.com/crowdflower/twitter-airlin
 First GOP Debate Twitter Sentiment - https://www.kaggle.com/crowdflower/first-gop-debate-twitter-sentiment/downloads/first-gop-debate-twitter-sentiment.zip/2
 
 
-Sentiment140 dataset - https://www.kaggle.com/kazanova/sentiment140/downloads/sentiment140.zip/2
+Sentiment140 dataset - http://cs.stanford.edu/people/alecmgo/trainingandtestdata.zip
 
 
 Large Movie Review Dataset v1.0 - http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz
-
 
 
 

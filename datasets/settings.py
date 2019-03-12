@@ -15,10 +15,6 @@ DATASET_FILE_EXTENSION = "csv"
 SAVE_STATS = True
 
 
-# Location dataset information will be saved
-# Only used if SAVE_STATS=True
-STATS_SAVE_DIR = None
-
 # Method in which final dataset will be established
 #    ->  when UNIFORM=FALSE all records from each dataset are combined
 #
