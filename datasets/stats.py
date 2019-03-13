@@ -14,7 +14,7 @@ def save_stats(dataset_stats, save_file):
         writer = csv.DictWriter(f, fieldnames=dataset_stats[0].keys())
         writer.writeheader()
         writer.writerows(dataset_stats)
-        
+
 
 def gather_dataset_stats(dataset, dataset_name):
     """"
@@ -29,18 +29,18 @@ def gather_dataset_stats(dataset, dataset_name):
 
     return {
         "dataset": dataset_name,
-        "negative samples": len([None for i in labels if i == -1]),
-        "neutral samples": len([None for i in labels if i == 0]),
-        "positive samples": len([None for i in labels if i == 1]),
-        "total samples": len(dataset),
-        "min sample length": lens[0],
-        "max sample length": lens[-1],
-        "samples length arithmetic mean": statistics.mean(lens),
-        "samples length harmonic_mean": statistics.harmonic_mean(lens),
-        "median sample length": statistics.median(lens),
-        "sample lengths mode": statistics.mode(lens),
-        "sample lengths stdev": statistics.stdev(lens),
-        "sample lengths variance": statistics.variance(lens)
+        "negative": len([None for i in labels if i == -1]),
+        "neutral": len([None for i in labels if i == 0]),
+        "positive": len([None for i in labels if i == 1]),
+        "total": len(dataset),
+        "min length": lens[0],
+        "max length": lens[-1],
+        "arithmetic mean": statistics.mean(lens),
+        "harmonic_mean": statistics.harmonic_mean(lens),
+        "median": statistics.median(lens),
+        "mode": statistics.mode(lens),
+        "stdev": statistics.stdev(lens),
+        "variance": statistics.variance(lens)
 
     }
 
@@ -49,9 +49,11 @@ def generate_stats(datasets):
     print("Generating statistics for dataset..")
 
     save_file = "dataset statistics.csv"
-    subset_names = datasets.keys()
 
-    dataset_stats = [gather_dataset_stats(datasets[dname], dname) for dname in subset_names]
+    # Gather statistics on each dataset
+    dataset_stats = [gather_dataset_stats(subset, dname) for dname, subset in datasets.items()]
+
+    # Export statistics to csv file
     save_stats(dataset_stats, save_file)
 
     print("Finished! Statistics saved as '%s'" % save_file)

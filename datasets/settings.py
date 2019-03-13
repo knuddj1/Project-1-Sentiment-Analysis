@@ -1,5 +1,5 @@
 """
-TODO
+Settings for the construction of
 """
 
 # The name of the folder the final dataset will be saved in
@@ -15,16 +15,10 @@ DATASET_FILE_EXTENSION = "csv"
 SAVE_STATS = True
 
 
-# Method in which final dataset will be established
-#    ->  when UNIFORM=FALSE all records from each dataset are combined
-#
-#    ->  when UNIFORM=TRUE each dataset has X amount of samples retrieved from it
-UNIFORM = False
-
-
+# type : int
 # Number of samples to retrieve from each dataset
 # If NUM_SAMPLES=None then the number of samples is the size of the smallest dataset is used
-# Only used if UNIFORM=True.
+# Using this may result in unbalanced datasets
 NUM_SAMPLES = None
 
 

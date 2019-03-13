@@ -1,7 +1,7 @@
 CONFIGS = {
 
     "Amazon_Reviews": {
-        "use": False,
+        "use": True,
         "dataset_path": "C:/Users/The Baboon/Desktop/BIT Y3 SM1/Project 1/datasets",
         "dataset_filename": "amazonreviews.zip",
         "loading_script": "amazon_reviews.py",
@@ -42,7 +42,7 @@ CONFIGS = {
 
 
     "Sentiment140": {
-        "use": False,
+        "use": True,
         "dataset_path": "C:/Users/The Baboon/Desktop/BIT Y3 SM1/Project 1/datasets",
         "dataset_filename": "trainingandtestdata.zip",
         "loading_script": "sentiment140.py",
