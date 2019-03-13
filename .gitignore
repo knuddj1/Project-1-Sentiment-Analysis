@@ -111,7 +111,7 @@ venv.bak/
 
 # Dataset
 .formatted_datasets/*
-**.formatted_datasets
-**.csv
-**.json
-dataset_config.py
+*.formatted_datasets
+*.csv
+*.json
+*.dataset_config.py
