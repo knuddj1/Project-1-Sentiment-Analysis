@@ -2,8 +2,6 @@ import json
 import csv
 import importlib.util
 import os
-from datasets.settings import *
-from . import data_configs
 
 
 def extract_dataset(path, config):
@@ -64,7 +62,7 @@ def save_to_json(save_path, dataset):
         json.dump(dataset, f)
 
 
-def format_dataset(data_config, script_dir, formatted_save_dir):
+def format_dataset(data_config, script_dir, formatted_save_dir, file_ext):
     """
     data_config : dict - loading information for a dataset
     script_dir : string - location of dataset loading scripts
@@ -75,9 +73,9 @@ def format_dataset(data_config, script_dir, formatted_save_dir):
     """
     data = extract_dataset(script_dir, data_config)
 
-    if DATASET_FILE_EXTENSION is "csv":
+    if file_ext is "csv":
         save_to_csv(formatted_save_dir, data)
-    elif DATASET_FILE_EXTENSION is "json":
+    elif file_ext is "json":
         save_to_json(formatted_save_dir, data)
     else:
         raise ValueError("File extension for formatted dataset must be either csv or json")
@@ -104,15 +102,13 @@ def retrieve_dataset(path):
         raise ValueError("Supported file types are csv and json")
 
 
-def load_data():
+def load_data(configs, file_ext):
     """
     output : dict - All datasets concatenated in format {dataset_name:{"input":x,"label":x}}
     --------------------------------------------------------------------
     TODO
     """
     current_dir = os.path.dirname(__file__)
-    
-    configs = data_configs.CONFIGS
 
     dataset = dict()
 
@@ -128,24 +124,22 @@ def load_data():
 
         if data_config["use"]:
             print("Currently loading dataset: '%s'" % dataset_name)
-            dataset_proper_name = '{}.{}'.format(dataset_name, DATASET_FILE_EXTENSION)
+            dataset_proper_name = '{}.{}'.format(dataset_name, file_ext)
             formatted_dataset_path = os.path.join(formatted_dir, dataset_proper_name)
 
             if os.path.exists(formatted_dataset_path):
                 dataset[dataset_name] = retrieve_dataset(formatted_dataset_path)
             else:
                 print("This dataset has not been formatted. It will be formatted now. This may take a while.")
-                dataset[dataset_name] = format_dataset(data_config, loading_scripts_dir, formatted_dataset_path)
+                dataset[dataset_name] = format_dataset(data_config, loading_scripts_dir, formatted_dataset_path, file_ext)
                 print("Formatting complete.")
             print("Done. \n")
 
     print("Finished loading! - Using {}/{} available datasets: \n".format(len(dataset.keys()), len(configs.keys())))
     for n, dname in enumerate(configs.keys()):
-        out_str = "\t {}. {}".format(n + 1, dname)
+        out_str = "{}. {}".format(n + 1, dname)
         if dname in dataset.keys():    
             out_str = out_str + " <=="
-        else:
-            out_str = out_str + " ><"
         print(out_str)
     print("\n")
     return dataset
