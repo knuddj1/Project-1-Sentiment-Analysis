@@ -2,6 +2,7 @@ from tkinter import *
 from landing_frame import LandingFrame
 from main_frame import MainFrame
 from settings_frame import SettingFrame
+from create_frame import CreateFrame
 
 
 LANDING_SIZE = (300, 200)
@@ -35,7 +36,7 @@ class Manager:
                 main_frame.load(self.configs)
         
         elif res is "proceed":
-            self.root.quit()
+            CreateFrame(self, CREATE_SIZE, self.settings, self.configs)
 
 
 

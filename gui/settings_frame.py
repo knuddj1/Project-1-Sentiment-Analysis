@@ -45,8 +45,8 @@ class SettingFrame(BaseFrame):
         f6 = Frame(container)
         f6.pack(fill=BOTH, padx=XPAD, pady=YPAD, ipadx=30, ipady=5)
         Label(f6, text="Number shuffles:").pack(side=LEFT, anchor=W)
-        self.e6 = Spinbox(f6, width=5, from_=0, to=10)
-        self.e6.pack(side=RIGHT, anchor=N)
+        self.e6 = IntVar()
+        Spinbox(f6, width=5, textvariable=self.e6, from_=0, to=10).pack(side=RIGHT, anchor=N)
 
 
         f7 = Frame(container)
@@ -80,5 +80,4 @@ class SettingFrame(BaseFrame):
         self.e3.set(settings["DATASET_FILE_EXTENSION"])
         self.e4.set(settings["TEST_SET_SIZE"])
         self.e5.set(settings["SHUFFLE"])
-        self.e6.delete(0, "end")
-        self.e6.insert(0, settings["NUM_SHUFFLES"])
+        self.e6.set(settings["NUM_SHUFFLES"])

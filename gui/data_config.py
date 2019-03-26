@@ -110,12 +110,16 @@ class DataConfigFrame(BaseFrame):
 
     def submit(self):
         if self.validate() is True:
+            other_params = None
+            if len(self.e5.get(0, END)) > 0:
+                other_params = {p.split(":")[0]: p.split(":")[1] for p in self.e5.get(0, END)}
+
             config = {
                 self.e1.get(): {
                     "dataset_path": self.e2.get(),
                     "loading_script": self.e3.get(),
                     "percent": self.e4.get(),
-                    "other_params": {p.split(":")[0]: p.split(":")[1] for p in self.e5.get(0, END)}
+                    "other_params": other_params
                 }
             }
             self.destroy()
