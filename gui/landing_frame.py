@@ -8,7 +8,7 @@ class LandingFrame(BaseFrame):
         top_frame = Frame(self)
         top_frame.pack(pady=20)
 
-        self.new_btn = Button(top_frame, width=10, height=3, text="New Config", command=lambda: self.action("new"))
+        self.new_btn = Button(top_frame, width=10, height=3, text="New Config", command=lambda: self.action("settings"))
         self.new_btn.pack()
         
         mid_frame = Frame(self)

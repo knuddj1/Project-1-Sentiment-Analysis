@@ -12,12 +12,13 @@ DATASET_FILE_EXTENSION = "csv"
 
 
 # Save file with information about each dataset
-SAVE_STATS = False
-
+SAVE_STATS = True
 
 
 # Delete all versions of dataset that are saved during creation of custom dataset
-DELETE_CACHED = False
+# Setting this to False will speed up creation of future custom datasets
+DELETE_CACHED = True
+
 
 # type : int
 # Number of samples to retrieve from each dataset

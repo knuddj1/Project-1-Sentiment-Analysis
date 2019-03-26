@@ -3,26 +3,26 @@ from tkinter import *
 from base_frame import BaseFrame
 
 
-DATA_CONFIG_XPAD = 5
-DATA_CONFIG_YPAD = 5
+XPAD = 5
+YPAD = 5
 
  
 class DataConfigFrame(BaseFrame):
     def __init__(self, manager, size):
         BaseFrame.__init__(self, manager, size)
         container = Frame(self, borderwidth=2, relief="groove")
-        container.pack(padx=DATA_CONFIG_XPAD, pady=DATA_CONFIG_YPAD,fill=BOTH, expand=YES)
+        container.pack(padx=XPAD, pady=YPAD,fill=BOTH, expand=YES)
         
         # Dataset Name
         f1 = Frame(container)
-        f1.pack(fill=BOTH, padx=DATA_CONFIG_XPAD, pady=DATA_CONFIG_YPAD, ipadx=30, ipady=5)
+        f1.pack(fill=BOTH, padx=XPAD, pady=YPAD, ipadx=30, ipady=5)
         Label(f1, text="Dataset name:").pack(side=LEFT, anchor=N)
-        self.e1 = Entry(f1, width=20)
+        self.e1 = Entry(f1, width=30)
         self.e1.pack(side=RIGHT, anchor=N)
 
         # Dataset Path
         f2 = Frame(container)
-        f2.pack(fill=BOTH, padx=DATA_CONFIG_XPAD, pady=DATA_CONFIG_YPAD, ipadx=30, ipady=5)
+        f2.pack(fill=BOTH, padx=XPAD, pady=YPAD, ipadx=30, ipady=5)
         f2a = Frame(f2)
         f2a.pack(fill=BOTH)
         Label(f2a, text="Dataset path:").pack(side=LEFT, anchor=N)
@@ -35,7 +35,7 @@ class DataConfigFrame(BaseFrame):
         
         # Loading Script Path
         f3 = Frame(container)
-        f3.pack(fill=BOTH, padx=DATA_CONFIG_XPAD, pady=DATA_CONFIG_YPAD, ipadx=30, ipady=5)
+        f3.pack(fill=BOTH, padx=XPAD, pady=YPAD, ipadx=30, ipady=5)
         f3a = Frame(f3)
         f3a.pack(fill=BOTH)
         Label(f3a, text="Loading script path:").pack(side=LEFT, anchor=N)
@@ -49,7 +49,7 @@ class DataConfigFrame(BaseFrame):
 
         # Percentage
         f4 = Frame(container)
-        f4.pack(fill=BOTH, padx=DATA_CONFIG_XPAD, pady=DATA_CONFIG_YPAD, ipadx=30, ipady=5)
+        f4.pack(fill=BOTH, padx=XPAD, pady=YPAD, ipadx=30, ipady=5)
         Label(f4, text="Percentage of dataset to use:").pack(side=LEFT, anchor=W)
         self.e4 = Scale(f4,orient='horizontal', length=150, from_=0, to=1, resolution=-1, digits=3)
         self.e4.set(1)
@@ -58,7 +58,7 @@ class DataConfigFrame(BaseFrame):
 
         # Optional Parameters
         f5 = Frame(container)
-        f5.pack(fill=BOTH, padx=DATA_CONFIG_XPAD, pady=DATA_CONFIG_YPAD, ipadx=30, ipady=5)
+        f5.pack(fill=BOTH, padx=XPAD, pady=YPAD, ipadx=30, ipady=5)
         f5a = Frame(f5)
         f5a.pack(fill=BOTH)
         Label(f5a, text="Optional loading script paramaters:").pack(side=LEFT, anchor=N)
@@ -131,12 +131,12 @@ class DataConfigFrame(BaseFrame):
             messagebox.showwarning("Warning", warning_msg)
             OK = False
 
-        if not os.path.exists(self.e2.get()):
+        elif not os.path.exists(self.e2.get()):
             warning_msg = "DATASET PATH: No file exists at the path: '{}'!".format(self.e2.get())
             messagebox.showwarning("Warning", warning_msg)
             OK = False
 
-        if not os.path.exists(self.e3.get()):
+        elif not os.path.exists(self.e3.get()):
             warning_msg = "LOADING SCRIPT PATH: No file exists at the path: '{}'!".format(self.e2.get())
             messagebox.showwarning("Warning", warning_msg)
             OK = False

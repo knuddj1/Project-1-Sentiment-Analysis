@@ -7,6 +7,8 @@ class BaseFrame(Toplevel):
         self.manager = manager
         Toplevel.__init__(self)
 
+        self.resizable(width=False, height=False)
+
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
 

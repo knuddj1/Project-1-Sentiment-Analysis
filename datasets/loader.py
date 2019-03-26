@@ -2,6 +2,7 @@ import json
 import csv
 import importlib.util
 import os
+import glob
 
 
 def extract_dataset(path, config):
@@ -32,56 +33,6 @@ def extract_dataset(path, config):
     return data
 
 
-def save_to_csv(save_path, dataset):
-    """
-    save_path : string - absoulute path to save dataset
-    dataset : list(dict)  
-    --------------------------------------------------------------------
-    Saves the dataset to csv.
-    Dataset should be a list of dictionaries with keys:
-        -> input
-        -> label
-    """
-    with open(save_path, mode="w", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["input", "label"])
-        writer.writeheader()
-        writer.writerows(dataset)
-
-
-def save_to_json(save_path, dataset):
-    """
-    save_path : string - absoulute path to save dataset
-    dataset : list(dict)  
-    --------------------------------------------------------------------
-    Saves the dataset to json.
-    Dataset should be a list of dictionaries with keys:
-        -> input
-        -> label
-    """
-    with open(save_path, mode="w", encoding="utf-8") as f:
-        json.dump(dataset, f)
-
-
-def format_dataset(data_config, script_dir, formatted_save_dir, file_ext):
-    """
-    data_config : dict - loading information for a dataset
-    script_dir : string - location of dataset loading scripts
-    formatted_save_dir : string - directory to save formatted dataset in
-    --------------------------------------------------------------------
-    output : dict - singular dataset in format {"input":x,"label":x}
-    --------------------------------------------------------------------
-    """
-    data = extract_dataset(script_dir, data_config)
-
-    if file_ext is "csv":
-        save_to_csv(formatted_save_dir, data)
-    elif file_ext is "json":
-        save_to_json(formatted_save_dir, data)
-    else:
-        raise ValueError("File extension for formatted dataset must be either csv or json")
-    return data
-
-
 def retrieve_dataset(path):
     """
     path : string - path to formatted dataset
@@ -102,8 +53,11 @@ def retrieve_dataset(path):
         raise ValueError("Supported file types are csv and json")
 
 
-def load_data(configs, file_ext):
+def load_data(configs, save_func):
     """
+    configs : list(dict) - configuration file for each dataset located in data_configs.py
+    file_ext : str - 
+    --------------------------------------------------------------------
     output : dict - All datasets concatenated in format {dataset_name:{"input":x,"label":x}}
     --------------------------------------------------------------------
     TODO
@@ -124,14 +78,15 @@ def load_data(configs, file_ext):
 
         if data_config["use"]:
             print("Currently loading dataset: '%s'" % dataset_name)
-            dataset_proper_name = '{}.{}'.format(dataset_name, file_ext)
-            formatted_dataset_path = os.path.join(formatted_dir, dataset_proper_name)
-
-            if os.path.exists(formatted_dataset_path):
-                dataset[dataset_name] = retrieve_dataset(formatted_dataset_path)
+            formatted_fpath_no_ext = os.path.join(formatted_dir, dataset_name)
+            
+            fpath = glob.glob(formatted_fpath_no_ext + ".*")
+            if len(fpath) is not 0:
+                dataset[dataset_name] = retrieve_dataset(fpath[0])
             else:
                 print("This dataset has not been formatted. It will be formatted now. This may take a while.")
-                dataset[dataset_name] = format_dataset(data_config, loading_scripts_dir, formatted_dataset_path, file_ext)
+                dataset[dataset_name] = extract_dataset(loading_scripts_dir, data_config)
+                save_func(formatted_fpath_no_ext, dataset[dataset_name])
                 print("Formatting complete.")
             print("Done. \n")
 

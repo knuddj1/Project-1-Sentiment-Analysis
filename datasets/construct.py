@@ -1,17 +1,29 @@
-def construct_new_dataset(datasets, stats, max_samples_per_set, test_set_size):
+import csv
+import json
+
+
+def get_subset(datasets, max_samples_per_set, test_set_size):
+    """"
+    datasets : dict - single/multiple dataset in format {"dataset_name":{"input":x,"label":x}}
+    --------------------------------------------------------------------
+    output : dict -> train_set - subset of each dataset concatenated
+                                 size = subset * (1 - test_size)
+             dict -> test_set - subset of each dataset concatenated
+                                 size = subset * test_size
+    --------------------------------------------------------------------
+    TODO
+    """
     import numpy as np    
     from copy import deepcopy
 
     print("Constructing new dataset..")
 
     if max_samples_per_set is None:
-        max_samples_per_set = min(stats, key=lambda x: x['total'])['total']
+        max_samples_per_set = len(min(datasets.items(), key=lambda k_v: len(k_v[1]))[1])
 
     num_per_label = max_samples_per_set // 3
     
-    dataset_names = datasets.keys()
-
-    dataset_dict = {dname:list() for dname in dataset_names}
+    dataset_dict = {dname:list() for dname in datasets.keys()}
 
     train_set = deepcopy(dataset_dict)
     test_set = deepcopy(dataset_dict)
@@ -24,16 +36,24 @@ def construct_new_dataset(datasets, stats, max_samples_per_set, test_set_size):
         for s in dataset: datasets_by_labels[s['label']][dname].append(s)
 
     for label, data in datasets_by_labels.items():
+
         left_over = 0 
         data = sorted(data.items(), key=lambda k_v: len(k_v[1]))
 
         for dname, label_set in data:
             np.random.shuffle(dataset)
 
-            sub_set = label_set[:num_per_label] + label_set[num_per_label: num_per_label + left_over]
-            train_test_split = int(len(sub_set) * (1-test_set_size))
+            subset = label_set[:num_per_label]
+            extra = label_set[num_per_label: num_per_label + left_over]
+            final = subset + extra
 
-            train_set[dname] += sub_set[:train_test_split]
-            test_set[dname] += sub_set[train_test_split:]
+            train_test_split = int(len(final) * (1-test_set_size))
 
-            left_over += num_per_label - len(sub_set)
+            train_set[dname] += final[:train_test_split]
+            test_set[dname] += final[train_test_split:]
+
+            left_over += num_per_label - len(final)
+
+    print("")
+
+    return train_set, test_set

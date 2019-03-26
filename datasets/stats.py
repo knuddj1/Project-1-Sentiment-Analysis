@@ -2,20 +2,6 @@ import statistics
 import csv
 
 
-def save_stats(dataset_stats, save_file):
-    """"
-    dataset_stats : list(dict) - Each list item is a dict of all dataset statistics
-    save_file : string - location to save dataset_stats
-    --------------------------------------------------------------------
-    saves dataset statistics to a csv file
-    """
-
-    with open(save_file, mode="w", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=dataset_stats[0].keys())
-        writer.writeheader()
-        writer.writerows(dataset_stats)
-
-
 def gather_dataset_stats(dataset, dataset_name):
     """"
     dataset : dict - singular dataset in format {"input":x,"label":x}
@@ -41,13 +27,14 @@ def gather_dataset_stats(dataset, dataset_name):
         "mode": statistics.mode(lens),
         "stdev": statistics.stdev(lens),
         "variance": statistics.variance(lens)
-
     }
 
 
-def generate_stats(datasets, save):
+def generate_stats(datasets, save, save_func):
     """"
-    dataset : dict - single/multiple dataset in format {"dataset_name":{"input":x,"label":x}}
+    datasets : dict - single/multiple dataset in format {"dataset_name":{"input":x,"label":x}}
+    --------------------------------------------------------------------
+    output : dict - statistics of dataset
     --------------------------------------------------------------------
     calculates statistics for all datasets and save them to a csv file.
     """
@@ -60,8 +47,8 @@ def generate_stats(datasets, save):
 
     if save:
         # Export statistics to csv file
-        save_file = "dataset statistics.csv"
-        save_stats(dataset_stats, save_file)
+        save_file = "dataset statistics"
+        save_func(save_file , dataset_stats, fieldnames=dataset_stats[0].keys())
         print("Statistics saved as '%s'" % save_file)
 
     return dataset_stats

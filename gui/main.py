@@ -1,10 +1,13 @@
 from tkinter import *
 from landing_frame import LandingFrame
 from main_frame import MainFrame
+from settings_frame import SettingFrame
 
 
 LANDING_SIZE = (300, 200)
-MAIN_SIZE = (800, 500)
+MAIN_SIZE = (770, 500)
+SETTING_SIZE = (300, 300)
+CREATE_SIZE = (800, 500)
 
 
 class Manager:
@@ -13,14 +16,25 @@ class Manager:
         self.root = root
         self.root.withdraw()
         self.landing_frame()
+        self.settings = None
+        self.configs = None
 
     def landing_frame(self):
         LandingFrame(self, LANDING_SIZE)
 
     def update(self, res=None, *args):
-        if res is "new":
-            MainFrame(self, MAIN_SIZE)
-        else:
+        if res is "settings":
+            setting_frame = SettingFrame(self, SETTING_SIZE)
+            if self.settings is not None:
+                setting_frame.load(self.settings)
+
+        elif res is "configs":
+            print(self.configs)
+            main_frame = MainFrame(self, MAIN_SIZE)
+            if self.configs is not None:
+                main_frame.load(self.configs)
+        
+        elif res is "proceed":
             self.root.quit()
 
 
