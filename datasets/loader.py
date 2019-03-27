@@ -29,7 +29,7 @@ def extract_dataset(config):
     return data
 
 
-def load_data(configs):
+def load_data(configs, msg_queue):
     """
     configs : dict - configuration file for each dataset
     --------------------------------------------------------------------
@@ -38,9 +38,11 @@ def load_data(configs):
     TODO
     """
     dataset = dict()
-    for dataset_name in configs.keys():
+    for i, dataset_name in enumerate(configs.keys()):
+        msg_queue.put("Currently loading dataset {}/{} -> '{}' \n".format(i + 1, len(configs.keys()),dataset_name))
         data_config = configs[dataset_name]
         dataset[dataset_name] = extract_dataset(data_config)
+        msg_queue.put("Finshed! \n")
     return dataset
 
 

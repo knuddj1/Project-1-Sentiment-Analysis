@@ -44,7 +44,7 @@ def save_multiple(datasets, save_dir, save_func):
 
 
 def get_save_func(file_ext):
-    if file_ext is "csv":
+    if file_ext == "csv":
         return save_to_csv
-    elif file_ext is "json":
+    elif file_ext == "json":
         return save_to_json

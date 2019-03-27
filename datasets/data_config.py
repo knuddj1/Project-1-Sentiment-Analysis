@@ -105,8 +105,9 @@ class DataConfigFrame(BaseFrame):
         self.e2.insert(END, config["DATASET_PATH"])
         self.e3.insert(END, config["LOADING_SCRIPT"])
         self.e4.set(config["PERCENT"])
-        for k,v in config["OTHER_PARAMS"].items():
-            self.e5.insert(END, "{}:{}".format(k,v))
+        if config["OTHER_PARAMS"] is not None:
+            for k,v in config["OTHER_PARAMS"].items():
+                self.e5.insert(END, "{}:{}".format(k,v))
 
     def submit(self):
         if self.validate() is True:

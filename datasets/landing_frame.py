@@ -23,7 +23,7 @@ class LandingFrame(BaseFrame):
         bot_frame = Frame(self)
         bot_frame.pack(ipadx=10)
 
-        self.load_btn = Button(bot_frame, width=30, height=2, text="Load Config", command=lambda: self.action("load", self.bar.get()))
+        self.load_btn = Button(bot_frame, width=30, height=2, text="Load Config", command=lambda: self.action("settings", self.bar.get()))
         self.load_btn.pack(side=BOTTOM)
 
     def action(self, response, path=None):
@@ -31,7 +31,7 @@ class LandingFrame(BaseFrame):
             self.load(path)
         else:
             self.destroy()
-            self.manager.update(response, path)
+            self.manager.update(response)
 
     def load(self, path):
         import os
@@ -47,11 +47,12 @@ class LandingFrame(BaseFrame):
             import json
             try:
                 with open(path, 'r') as f:
-                    config = json.load(path)
+                    config = json.load(f)
                     self.manager.configs = config["CONFIGS"]
                     del config["CONFIGS"]
-                    print(config)
                     self.manager.settings = config
+                    self.destroy()
+                    self.manager.update("settings")
             except:
                 warning_msg = "CONFIG PATH: Not a valid config!"
                 messagebox.showwarning("Warning", warning_msg)
