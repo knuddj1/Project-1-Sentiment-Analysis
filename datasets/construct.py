@@ -2,7 +2,7 @@ import csv
 import json
 
 
-def get_subset(datasets, max_samples_per_set, test_set_size):
+def get_subset(datasets, test_set_size):
     """"
     datasets : dict - single/multiple dataset in format {"dataset_name":{"input":x,"label":x}}
     --------------------------------------------------------------------
@@ -16,16 +16,13 @@ def get_subset(datasets, max_samples_per_set, test_set_size):
     import numpy as np    
     from copy import deepcopy
 
-    print("Constructing new dataset..")
-
-    if max_samples_per_set is None:
-        max_samples_per_set = len(min(datasets.items(), key=lambda k_v: len(k_v[1]))[1])
+    max_samples_per_set = len(min(datasets.items(), key=lambda k_v: len(k_v[1]))[1])
 
     num_per_label = max_samples_per_set // 3
     
     dataset_dict = {dname:list() for dname in datasets.keys()}
 
-    train_set = deepcopy(dataset_dict)
+    train_set = list()
     test_set = deepcopy(dataset_dict)
 
     datasets_by_labels = {
@@ -49,11 +46,9 @@ def get_subset(datasets, max_samples_per_set, test_set_size):
 
             train_test_split = int(len(final) * (1-test_set_size))
 
-            train_set[dname] += final[:train_test_split]
+            train_set += final[:train_test_split]
             test_set[dname] += final[train_test_split:]
 
             left_over += num_per_label - len(final)
-
-    print("")
 
     return train_set, test_set

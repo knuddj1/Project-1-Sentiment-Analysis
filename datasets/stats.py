@@ -30,25 +30,14 @@ def gather_dataset_stats(dataset, dataset_name):
     }
 
 
-def generate_stats(datasets, save, save_func):
+def generate_stats(datasets):
     """"
     datasets : dict - single/multiple dataset in format {"dataset_name":{"input":x,"label":x}}
     --------------------------------------------------------------------
-    output : dict - statistics of dataset
+    output : list(dict) - statistics of dataset
     --------------------------------------------------------------------
     calculates statistics for all datasets and save them to a csv file.
     """
-    print("Generating statistics for each dataset..")
-
-    # Gather statistics on each dataset
-    dataset_stats = [gather_dataset_stats(subset, dname) for dname, subset in datasets.items()]
     
-    print("Finished!")
-
-    if save:
-        # Export statistics to csv file
-        save_file = "dataset statistics"
-        save_func(save_file , dataset_stats, fieldnames=dataset_stats[0].keys())
-        print("Statistics saved as '%s'" % save_file)
-
-    return dataset_stats
+    # Gather statistics on each dataset
+    return [gather_dataset_stats(subset, dname) for dname, subset in datasets.items()]

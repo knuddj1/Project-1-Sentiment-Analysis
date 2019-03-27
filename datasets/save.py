@@ -48,5 +48,3 @@ def get_save_func(file_ext):
         return save_to_csv
     elif file_ext is "json":
         return save_to_json
-    else:
-        raise ValueError("File extension for formatted dataset must be either csv or json")
