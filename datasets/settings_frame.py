@@ -39,6 +39,7 @@ class SettingFrame(BaseFrame):
         f5 = Frame(container)
         f5.pack(fill=BOTH, padx=XPAD, pady=YPAD, ipadx=30, ipady=5)
         self.e5 = BooleanVar()
+        self.e5.set(True)
         Label(f5, text="Shuffle Dataset").pack(side=LEFT, anchor=N)
         Checkbutton(f5, variable=self.e5).pack(side=LEFT, anchor=N)
 
@@ -46,8 +47,22 @@ class SettingFrame(BaseFrame):
         f6.pack(fill=BOTH, padx=XPAD, pady=YPAD, ipadx=30, ipady=5)
         Label(f6, text="Number shuffles:").pack(side=LEFT, anchor=W)
         self.e6 = IntVar()
+        self.e6.set(1)
         Spinbox(f6, width=5, textvariable=self.e6, from_=0, to=10).pack(side=RIGHT, anchor=N)
 
+        f7 = Frame(container)
+        f7.pack(fill=BOTH, padx=XPAD, pady=YPAD, ipadx=30, ipady=5)
+        f7a = Frame(container)
+        f7a.pack(fill=BOTH)
+        Label(f7a, text="Dataset Concatenation Type:").pack(side=LEFT, anchor=N)
+        f7b = Frame(container)
+        f7b.pack(fill=BOTH)
+        self.e7 = StringVar()
+        self.e7.set("equal")
+        Label(f7b, text="EQUAL").pack(side=LEFT, anchor=S)
+        Radiobutton(f7b, variable=self.e7, value="equal").pack(side=LEFT, anchor=S)
+        Label(f7b, text="PERCENTAGE").pack(side=LEFT, anchor=S)
+        Radiobutton(f7b, variable=self.e7, value="percentage").pack(side=LEFT, anchor=S)
 
         f7 = Frame(container)
         f7.pack(fill=BOTH, padx=XPAD, pady=YPAD, ipadx=30, ipady=5)
@@ -60,7 +75,8 @@ class SettingFrame(BaseFrame):
                 "DATASET_FILE_EXTENSION" : self.e3.get(),
                 "TEST_SET_SIZE" : self.e4.get(),
                 "SHUFFLE" : self.e5.get(),
-                "NUM_SHUFFLES" : self.e6.get()
+                "NUM_SHUFFLES" : self.e6.get(),
+                "CONCAT_TYPE" : self.e7.get()
             }
             self.destroy()
             self.manager.settings = settings
@@ -86,3 +102,4 @@ class SettingFrame(BaseFrame):
         self.e4.set(settings["TEST_SET_SIZE"])
         self.e5.set(settings["SHUFFLE"])
         self.e6.set(settings["NUM_SHUFFLES"])
+        self.e7.set(settings["CONCAT_TYPE"])

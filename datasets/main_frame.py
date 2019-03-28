@@ -63,6 +63,7 @@ class MainFrame(BaseFrame):
         DataConfigFrame(self, DATA_CONFIG_SIZE)   
 
     def add(self, config):
+        self.grab_release()
         self.configs.update(config)
         self.display()
 

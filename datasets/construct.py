@@ -2,7 +2,8 @@ import csv
 import json
 
 
-def get_subset(datasets, test_set_size):
+
+def equal(datasets, test_set_size, shuffle, n_shuffles):
     """"
     datasets : dict - single/multiple dataset in format {"dataset_name":{"input":x,"label":x}}
     --------------------------------------------------------------------
@@ -38,7 +39,9 @@ def get_subset(datasets, test_set_size):
         data = sorted(data.items(), key=lambda k_v: len(k_v[1]))
 
         for dname, label_set in data:
-            np.random.shuffle(dataset)
+            if shuffle:
+                for _ in range(n_shuffles):
+                    np.random.shuffle(dataset)
 
             subset = label_set[:num_per_label]
             extra = label_set[num_per_label: num_per_label + left_over]
@@ -52,3 +55,14 @@ def get_subset(datasets, test_set_size):
             left_over += num_per_label - len(final)
 
     return train_set, test_set
+
+
+def percentage(datasets, test_set_size, percentages, shuffle, n_shuffles):
+    pass
+
+
+def get_subset(datasets, test_set_size, concat_type, shuffle, n_shuffles):
+    if concat_type == "equal":
+        return equal(datasets, test_set_size, shuffle, n_shuffles)
+    elif concat_type == "percentage":
+        return percentage(datasets, test_set_size, None, shuffle, n_shuffles)

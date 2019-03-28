@@ -7,7 +7,7 @@ from create_frame import CreateFrame
 
 LANDING_SIZE = (300, 200)
 MAIN_SIZE = (770, 500)
-SETTING_SIZE = (300, 300)
+SETTING_SIZE = (300, 400)
 CREATE_SIZE = (500, 300)
 
 

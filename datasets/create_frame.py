@@ -4,6 +4,7 @@ import construct
 import save
 import threading
 import queue
+import os
 from tkinter import *
 from tkinter import messagebox
 from base_frame import BaseFrame
@@ -56,12 +57,21 @@ class CreateFrame(BaseFrame):
         msg_queue.put("Finished loading datasets! \n" + "-"*50 + "\n")
         msg_queue.put("Constructing new dataset \n")
         # Construct new dataset
-        training_set, test_set = construct.get_subset(datasets, self.final["TEST_SET_SIZE"])
+        training_set, test_set = construct.get_subset(
+                                                datasets,
+                                                self.final["TEST_SET_SIZE"],
+                                                self.final["CONCAT_TYPE"],
+                                                self.final["SHUFFLE"],
+                                                self.final["NUM_SHUFFLES"]
+                                            )
         msg_queue.put("Finished Constructing datasets! \n" + "-"*50 + "\n")
 
         msg_queue.put("Saving dataset \n")
-        save_func(self.final["DATASET_NAME"] + "_training_set", training_set)
-        save.save_multiple(test_set, self.final["DATASET_NAME"] + "_test_set", save_func)
+        save_path = self.get_save_path(self.final["DATASET_NAME"] + "_training_set")
+        save_func(save_path, training_set)
+        
+        save_path = self.get_save_path(self.final["DATASET_NAME"] + "_test_set")
+        save.save_multiple(test_set, save_path, save_func)
         msg_queue.put("Finished saving dataset \n" + "-"*50 + "\n")
 
         msg = "Do you want to save dataset statistics ?"
@@ -69,20 +79,33 @@ class CreateFrame(BaseFrame):
             msg_queue.put("Saving dataset statistics \n")
             # Save statistics of each individual dataset
             datasets_stats = stats.generate_stats(test_set)
-            save_func(self.final["DATASET_NAME"] + "_test_set_stats", datasets_stats, fieldnames=datasets_stats[0].keys())
+            save_path = self.get_save_path("test_set_stats")
+            save_func(save_path, datasets_stats, fieldnames=datasets_stats[0].keys())
             msg_queue.put("Finished saving statistics \n" + "-"*50 + "\n")
 
         self.manager.update()
-    
+
+
     def save_final(self):
         msg = "Do you want to save your settings and configs ?"
         if messagebox.askyesno("SAVE", msg):
             import json
             fname = "{}_{}.{}".format(self.final["DATASET_NAME"], "config", "json")
-            with open(fname, "w") as f:
+            fp = self.get_save_path(fname)
+            with open(fp, "w") as f:
                 json.dump(self.final, f, indent=4)
 
-        
+
+    def get_savedir(self):
+        save_dir = self.final["DATASET_NAME"]
+        if not os.path.isdir(save_dir):
+            os.mkdir(save_dir)
+        return save_dir
+
+
+    def get_save_path(self, fname):
+        save_dir = self.get_savedir()
+        return os.path.join(save_dir, fname)
         
 
 

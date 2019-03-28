@@ -10,6 +10,7 @@ YPAD = 5
 class DataConfigFrame(BaseFrame):
     def __init__(self, manager, size):
         BaseFrame.__init__(self, manager, size)
+        self.grab_set()
         container = Frame(self, borderwidth=2, relief="groove")
         container.pack(padx=XPAD, pady=YPAD,fill=BOTH, expand=YES)
         
