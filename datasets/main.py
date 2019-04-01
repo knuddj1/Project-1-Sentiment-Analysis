@@ -1,8 +1,10 @@
+import pandas
 from tkinter import *
 from landing_frame import LandingFrame
 from main_frame import MainFrame
 from settings_frame import SettingFrame
 from create_frame import CreateFrame
+
 
 
 LANDING_SIZE = (300, 200)

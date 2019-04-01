@@ -61,6 +61,7 @@ class CreateFrame(BaseFrame):
                                                 datasets,
                                                 self.final["TEST_SET_SIZE"],
                                                 self.final["CONCAT_TYPE"],
+                                                self.final["CONFIGS"],
                                                 self.final["SHUFFLE"],
                                                 self.final["NUM_SHUFFLES"]
                                             )
