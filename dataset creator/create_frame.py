@@ -57,14 +57,7 @@ class CreateFrame(BaseFrame):
         msg_queue.put("Finished loading datasets! \n" + "-"*50 + "\n")
         msg_queue.put("Constructing new dataset \n")
         # Construct new dataset
-        training_set, test_set = construct.get_subset(
-                                                datasets,
-                                                self.final["TEST_SET_SIZE"],
-                                                self.final["CONCAT_TYPE"],
-                                                self.final["CONFIGS"],
-                                                self.final["SHUFFLE"],
-                                                self.final["NUM_SHUFFLES"]
-                                            )
+        training_set, test_set = construct.get_subset(datasets, self.final)
         msg_queue.put("Finished Constructing datasets! \n" + "-"*50 + "\n")
 
         msg_queue.put("Saving dataset \n")
