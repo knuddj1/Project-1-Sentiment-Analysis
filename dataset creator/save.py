@@ -13,7 +13,7 @@ def save_to_csv(save_path, dataset, fieldnames=["input", "label"]):
         -> label
     """
     save_path += ".csv"
-    with open(save_path, mode="w", encoding="utf-8") as f:
+    with open(save_path, mode="w", encoding="utf-8", newline='') as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(dataset)
