@@ -1,8 +1,9 @@
 import os
+import pandas as pd
 from textblob import TextBlob
 from textblob.sentiments import NaiveBayesAnalyzer, PatternAnalyzer
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-import pandas as pd
+from own_model import OwnModel
 
 
 def textblob_naivebayes(df):
@@ -37,11 +38,14 @@ def vader(df):
     return correct / len(df)
 
 
-testdir = "C:/Users/knuddj1/Desktop/custom/custom_test_set"
+model_path = "model.json"
+weights_path = "model.h5"
+vocab_path = "word_to_index_top_30000.json"
+testdir = "custom_test_set"
 
 test_datasets = os.listdir(testdir)
 
-classifiers = [textblob_naivebayes, textblob_pattern, vader]
+classifiers = [textblob_naivebayes, textblob_pattern, vader, OwnModel(model_path, weights_path, vocab_path)]
 
 results = dict()
 for classifier in classifiers:
@@ -57,10 +61,14 @@ for dataset_file in test_datasets:
         results[classifier.__name__][dataset_name] = classifier(df)
 
 outlst = list()
-for k,v in results.items():
-    v.update({"classifier" : k})
-    outlst.append(v)
-print(outlst)
+for k, d in results.items():
+    total = 0
+    for key, v in d.items():
+        total += v
+    total /= len(d.keys())
+    d.update({"overall": total})
+    d.update({"classifier" : k})
+    outlst.append(d)
 
 
 import csv
