@@ -114,3 +114,4 @@ venv.bak/
 *.formatted_datasets
 *.csv
 *.json
+!baseline_results.csv

@@ -47,7 +47,7 @@ def get_test_data(vocab, df):
         labels.append(r['label'])
             
     x_test, y_test = prepare(data, labels)
-    
+
     return x_test, y_test
     
 
@@ -55,6 +55,7 @@ class OwnModel:
     def __init__(self, m_path, w_path, voc_path):
         self.model = self._get_model(m_path, w_path)
         self.vocab = self._get_vocab(voc_path)
+        self.__name__ = "OwnModel"
 
     def __call__(self, df):
         x_test, y_test = get_test_data(self.vocab, df) 
@@ -76,6 +77,3 @@ class OwnModel:
         with open('word_to_index_top_30000.json', 'r') as f:
             vocab = json.load(f)
         return vocab
-
-    def __name__(self):
-        return "OwnModel"
