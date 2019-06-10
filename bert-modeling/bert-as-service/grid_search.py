@@ -108,6 +108,6 @@ for e in embed_sizes:
             break
     break
 
-with open(save_dir, 'w') as f:
+with open(os.path.join(save_dir, "results.json", 'w') as f:
     json.dump(all_results, f, indent=4)
         
