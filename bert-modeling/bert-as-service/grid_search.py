@@ -44,7 +44,7 @@ if os.path.isdir(model_save_dir): os.mkdir(model_save_dir)
 start = time.time()
 n_trained = 0
 
-for e in embed_size:
+for e in embed_sizes:
     X, y, test_sets = get_data(embed_size=e)
 
     for vs, bs, opt, do, lc in combinations:
