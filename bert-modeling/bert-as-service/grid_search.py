@@ -106,7 +106,7 @@ for e in embed_sizes:
 
         if n_trained == 4:
             break
-
+    break
 
 with open(save_dir, 'w') as f:
     json.dump(all_results, f, indent=4)
