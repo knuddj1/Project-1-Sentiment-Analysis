@@ -14,9 +14,8 @@ def load_and_process(path):
 
 
 def get_data(embed_size):
-    print("BEFORE")
     train_path = r"R:\custom_BERT_embedded\custom_training_set_BERT_encoded_uncased_{0}.json".format(embed_size)
-    print("AFTER")
+    print(train_path)
     X_train, y_train = load_and_process(train_path)
 
     test_dir = r"R:\custom bert encoded\custom_test_set_BERT_encoded_uncased_{0}".format(embed_size)
@@ -24,7 +23,6 @@ def get_data(embed_size):
     test_sets = dict()
 
     for fpath in test_fpaths:
-        print("here")
         dataset_name = fpath.split("\\")[-1].split("_")[0]
         X_test, y_test = load_and_process(fpath)
         test_sets[dataset_name] = {"X_test": X_test, "y_test": y_test}
