@@ -56,8 +56,9 @@ for e in embed_sizes:
         os.system('cls')
         print("{0}/{1} Models Trained!".format(n_trained, len(combinations)))
         print("Total Time elapsed: {0}".format(round(time.time()-start, 2)))
-        print("Average Model Training Time: {0}".format(round((time.time()-start) / (n_trained + 1), 2)))
-        print("=======================================================")
+        if n_trained > 0:
+            print("Average Model Training Time: {0}".format(round((time.time()-start) / n_trained, 2)))
+        print("================================")
         print("Current Model Parameters:")
         print("  => Validation Split: {0} ".format(vs))
         print("  => Batch Size: {0} ".format(bs))
