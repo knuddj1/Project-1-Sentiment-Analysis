@@ -14,10 +14,11 @@ validation_splits = [0.1, 0.2]
 batch_sizes = [64, 128, 256]
 optimizers = ["sgd", "rmsprop", "adam"]
 dropout_rates = [0.1, 0.2, 0.3, 0.4, 0.5]
+activations = ["relu", "tanh", "sigmoid"]
 
 
 ### Generating all possible model layers ##
-dense_vals = [Dense(32), Dense(64), Dense(128), Dense(256)]
+dense_vals = [32, 64, 128, 128, 256]
 max_n_dense_layers = 4
 layers = []
 
@@ -31,7 +32,7 @@ NB_EPOCHS = 5
 SHUFFLE = True
 
 ### Creating gridsearch iterator 
-combinations = list(itertools.product(validation_splits, batch_sizes, optimizers, dropout_rates, layers))
+combinations = list(itertools.product(validation_splits, batch_sizes, optimizers, dropout_rates, activations layers))
 ########################################################
 
 
@@ -47,7 +48,7 @@ n_trained = 0
 for e in embed_sizes:
     X, y, test_sets = get_data(embed_size=e)
 
-    for vs, bs, opt, do, lc in combinations:
+    for vs, bs, opt, do, act, dls in combinations:
         os.system('cls')
         print("Training!")
         print("{0}/{1} Models Trained!".format(n_trained, len(combinations)))
@@ -56,10 +57,14 @@ for e in embed_sizes:
 
         model = Sequential()
         dense_layers_string = ""
-        for l in lc:
-            model.add(l)
+        for n, dl in enumerate(dls):
+            if n == 0:
+                model.add(Dense(dl, activation=act, input_shape=(X.shape[-1],)))
+            else:
+                model.add(Dense(dl, activation=act))
             model.add(Dropout(do))
-            dense_layers_string += "D-{0}".format(l.units)
+            dense_layers_string += "D-{0}".format(dl)
+        model.add(Dense(3, activation="softmax"))
         model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=['accuracy'])
         train_results = model.fit(X, y, batch_size=bs, shuffle=SHUFFLE, epochs=NB_EPOCHS,  validation_split=vs, verbose=1)
 
