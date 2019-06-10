@@ -55,6 +55,14 @@ for e in embed_sizes:
         print("Training!")
         print("{0}/{1} Models Trained!".format(n_trained, len(combinations)))
         print("Time elapsed: {0}".format(round(time.time()-start, 2)))
+        print("Current Model Parameters:")
+        print("Validation Split -> {0} ".format(vs))
+        print("Batch Size -> {0} ".format(bs))
+        print("Optimizer -> {0} ".format(opt))
+        print("Dropout Percentage -> {0} ".format(do))
+        print("Activation Function -> {0} ".format(act))
+        print("Dense Layers -> {0}".format('|'.join(str(x) for x in dls))
+        
         n_trained += 1
 
         model = Sequential()
