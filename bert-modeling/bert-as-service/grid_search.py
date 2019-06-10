@@ -31,7 +31,7 @@ NB_EPOCHS = 5
 SHUFFLE = True
 
 ### Creating gridsearch iterator 
-combinations = itertools.product(validation_splits, batch_sizes, optimizers, dropout_rates, layers)
+combinations = list(itertools.product(validation_splits, batch_sizes, optimizers, dropout_rates, layers))
 ########################################################
 
 
