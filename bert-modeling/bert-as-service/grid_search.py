@@ -70,7 +70,7 @@ for e in embed_sizes:
 
         test_results = dict()
         for dname, dset in test_sets.items():
-            test_results[dname] = model.evaluate(dset["X_test"], dset["y_test"], , verbose=0)
+            test_results[dname] = model.evaluate(dset["X_test"], dset["y_test"], verbose=0)
 
         model_save_path = "E-{0} VS-{1} BS-{2} OPT-{3} DO-{4} {5}".format(e, vs, bs, opt, do, dense_layers_string)
         model_save_path = os.path.join(model_save_dir, model_save_path)
