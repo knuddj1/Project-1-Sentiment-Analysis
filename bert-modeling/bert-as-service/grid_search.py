@@ -50,8 +50,8 @@ for e in embed_size:
     for vs, bs, opt, do, lc in combinations:
         os.system('cls')
         print("Training!")
-        print("{0}/{1} Models Trained!".format(n_trained, len(combinations))
-        print("Time elapsed: {0}".format(round(time.time()-start, 2))
+        print("{0}/{1} Models Trained!".format(n_trained, len(combinations)))
+        print("Time elapsed: {0}".format(round(time.time()-start, 2)))
         n_trained += 1
 
         model = Sequential()
