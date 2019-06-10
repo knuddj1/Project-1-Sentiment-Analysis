@@ -14,7 +14,7 @@ def load_and_process(path):
 
 
 def get_data(embed_size):
-    train_path = r"R:\custom_BERT_embedded\custom_training_set_BERT_encoded_uncased_{1}.json".format(embed_size)
+    train_path = r"R:\custom_BERT_embedded\custom_training_set_BERT_encoded_uncased_{0}.json".format(embed_size)
     X_train, y_train = load_and_process(train_path)
 
     test_dir = r"R:\custom bert encoded\custom_test_set_BERT_encoded_uncased_{0}".format(embed_size)
