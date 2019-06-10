@@ -18,8 +18,8 @@ activations = ["relu", "tanh", "sigmoid"]
 
 
 ### Generating all possible model layers ##
-dense_vals = [32, 64, 128, 128, 256]
-max_n_dense_layers = 4
+dense_vals = [32, 64, 128, 256]
+max_n_dense_layers = 3
 layers = []
 
 for i in range(1, max_n_dense_layers + 1):
@@ -32,7 +32,7 @@ NB_EPOCHS = 5
 SHUFFLE = True
 
 ### Creating gridsearch iterator 
-combinations = list(itertools.product(validation_splits, batch_sizes, optimizers, dropout_rates, activations layers))
+combinations = list(itertools.product(validation_splits, batch_sizes, optimizers, dropout_rates, activations, layers))
 ########################################################
 
 
