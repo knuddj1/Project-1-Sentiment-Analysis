@@ -104,10 +104,8 @@ for e in embed_sizes:
         with open(os.path.join(model_save_path,"model_params.json"), 'w') as f:
             json.dump(results_dic, f, indent=4)
 
-        if n_trained == 4:
-            break
-    break
 
+### Saving all results
 with open(os.path.join(save_dir, "results.json"), 'w') as f:
     json.dump(all_results, f, indent=4)
         
