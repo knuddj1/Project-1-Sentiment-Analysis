@@ -38,9 +38,9 @@ combinations = list(itertools.product(validation_splits, batch_sizes, optimizers
 
 ### Verify path to save is correct
 save_dir = "R:\grid_search_results"
-if os.path.isdir(save_dir): os.mkdir(save_dir)
+if not os.path.isdir(save_dir): os.mkdir(save_dir)
 model_save_dir = os.path.join(save_dir, "models")
-if os.path.isdir(model_save_dir): os.mkdir(model_save_dir)
+if not os.path.isdir(model_save_dir): os.mkdir(model_save_dir)
 
 start = time.time()
 n_trained = 0
@@ -70,10 +70,11 @@ for e in embed_sizes:
 
         test_results = dict()
         for dname, dset in test_sets.items():
-            test_results[dname] = model.evaluate(dset["X_test"], dset["y_test"])
+            test_results[dname] = model.evaluate(dset["X_test"], dset["y_test"], , verbose=0)
 
         model_save_path = "E-{0} VS-{1} BS-{2} OPT-{3} DO-{4} {5}".format(e, vs, bs, opt, do, dense_layers_string)
-        os.mkdir(model_save_path)
+        model_save_path = os.path.join(model_save_dir, model_save_path)
+        if not os.path.isdir(model_save_path): os.mkdir(model_save_path)
 
         results_dic = {
             'acc': history.history['acc'],
