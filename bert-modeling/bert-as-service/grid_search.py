@@ -61,8 +61,8 @@ for e in embed_sizes:
         print("Optimizer -> {0} ".format(opt))
         print("Dropout Percentage -> {0} ".format(do))
         print("Activation Function -> {0} ".format(act))
-        print("Dense Layers -> {0}".format('|'.join(str(x) for x in dls))
-        
+        print("Dense Layers -> {0}".format('|'.join(str(x) for x in dls)))
+
         n_trained += 1
 
         model = Sequential()
