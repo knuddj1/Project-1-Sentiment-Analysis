@@ -45,6 +45,8 @@ if not os.path.isdir(model_save_dir): os.mkdir(model_save_dir)
 start = time.time()
 n_trained = 0
 
+all_results = {}
+
 for e in embed_sizes:
     X, y, test_sets = get_data(embed_size=e)
 
@@ -70,10 +72,10 @@ for e in embed_sizes:
 
         test_results = dict()
         for dname, dset in test_sets.items():
-            test_results[dname] = model.evaluate(dset["X_test"], dset["y_test"], verbose=0)
+            test_results[dname] = model.evaluate(dset["X_test"], dset["y_test"], verbose=0)[0]
 
-        model_save_path = "E-{0} VS-{1} BS-{2} OPT-{3} DO-{4} {5}".format(e, vs, bs, opt, do, dense_layers_string)
-        model_save_path = os.path.join(model_save_dir, model_save_path)
+        model_name = "E-{0} VS-{1} BS-{2} OPT-{3} DO-{4} {5}".format(e, vs, bs, opt, do, dense_layers_string)
+        model_save_path = os.path.join(model_save_dir, model_name)
         if not os.path.isdir(model_save_path): os.mkdir(model_save_path)
 
         results_dic = {
@@ -81,11 +83,13 @@ for e in embed_sizes:
             'val_acc': history.history['val_acc'],
         }
 
+        all_results[model_name] = results_dic
+
         for dname, acc in test_results.items():
             results_dic[dname] = acc
 
         with open(os.path.join(model_save_path,'results.json'), 'w') as f:
-            json.dump(results_dic, f)
+            json.dump(results_dic, f, indent=4)
         
         model_json = model.to_json()
         with open(os.path.join(model_save_path,"model.json"), "w") as json_file:
@@ -98,6 +102,12 @@ for e in embed_sizes:
         }
 
         with open(os.path.join(model_save_path,"model_params.json"), 'w') as f:
-            json.dump(results_dic, f)
+            json.dump(results_dic, f, indent=4)
 
+        if n_trained == 4:
+            break
+
+
+with open(save_dir, 'w') as f:
+    json.dump(all_results, f, indent=4)
         
