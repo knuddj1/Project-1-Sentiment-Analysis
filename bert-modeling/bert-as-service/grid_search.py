@@ -2,6 +2,7 @@ import json
 import numpy as np
 import itertools
 import os
+import time
 from load_bert_data import get_data
 from keras.models import Sequential
 from keras.layers import Dense
@@ -40,11 +41,19 @@ if os.path.isdir(save_dir): os.mkdir(save_dir)
 model_save_dir = os.path.join(save_dir, "models")
 if os.path.isdir(model_save_dir): os.mkdir(model_save_dir)
 
+start = time.time()
+n_trained = 0
 
 for e in embed_size:
     X, y, test_sets = get_data(embed_size=e)
 
     for vs, bs, opt, do, lc in combinations:
+        os.system('cls')
+        print("Training!")
+        print("{0}/{1} Models Trained!".format(n_trained, len(combinations))
+        print("Time elapsed: {0}".format(round(time.time()-start, 2))
+        n_trained += 1
+
         model = Sequential()
         dense_layers_string = ""
         for l in lc:
