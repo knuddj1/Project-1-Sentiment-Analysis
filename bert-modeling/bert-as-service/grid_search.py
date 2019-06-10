@@ -66,7 +66,7 @@ for e in embed_sizes:
             dense_layers_string += "D-{0}".format(dl)
         model.add(Dense(3, activation="softmax"))
         model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=['accuracy'])
-        train_results = model.fit(X, y, batch_size=bs, shuffle=SHUFFLE, epochs=NB_EPOCHS,  validation_split=vs, verbose=1)
+        history = model.fit(X, y, batch_size=bs, shuffle=SHUFFLE, epochs=NB_EPOCHS,  validation_split=vs, verbose=0)
 
         test_results = dict()
         for dname, dset in test_sets.items():
@@ -76,8 +76,8 @@ for e in embed_sizes:
         os.mkdir(model_save_path)
 
         results_dic = {
-            'acc':       train_results['acc'],
-            'val_acc':   train_results['val_acc'],
+            'acc': history.history['acc'],
+            'val_acc': history.history['val_acc'],
         }
 
         for dname, acc in test_results.items():
