@@ -22,6 +22,7 @@ def get_data(embed_size):
     test_sets = dict()
 
     for fpath in test_fpaths:
+        print("here")
         dataset_name = fpath.split("\\")[-1].split("_")[0]
         X_test, y_test = load_and_process(fpath)
         test_sets[dataset_name] = {"X_test": X_test, "y_test": y_test}
