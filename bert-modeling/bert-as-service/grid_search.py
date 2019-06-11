@@ -3,6 +3,7 @@ import numpy as np
 import itertools
 import os
 import time
+import datetime
 from load_bert_data import get_data
 from keras.models import Sequential
 from keras.layers import Dense
@@ -48,8 +49,9 @@ if not os.path.isdir(model_save_dir): os.mkdir(model_save_dir)
 
 start = time.time()
 n_trained = 0
-
+total_trained = 0
 all_results = {}
+average = 1
 
 for e in embed_sizes:
     load_time = time.time()
@@ -68,14 +70,16 @@ for e in embed_sizes:
 
         ### Useful For resuming training
         if not os.path.isdir(model_save_path):
-
             os.mkdir(model_save_path)
 
             os.system('cls')
             print("{0}/{1} Models Trained!".format(n_trained, len(combinations) * 2))
             print("Total Time elapsed: {0}".format(round(time.time()-start, 2)))
-            if n_trained > 0:
-                print("Average Model Training Time: {0}".format(round((time.time()-start) / n_trained, 2)))
+            if total_trained > 0:
+                average = round((time.time()-start) / total_trained, 2)
+                print("Average Model Training Time: {0}".format(average))
+            estimate = datetime.timedelta(seconds=((len(combinations) * 2) - n_trained) * average))
+            print("Estimated Completion Time: {0}".format(estimate)
             print("================================")
             print("Current Model Parameters:")
             print("  => Validation Split: {0} ".format(vs))
@@ -144,6 +148,7 @@ for e in embed_sizes:
         del dense_layers_string
 
         n_trained += 1
+        total_trained += 1
 
 ### Saving all results
 with open(os.path.join(save_dir, "results.json"), 'w') as f:
