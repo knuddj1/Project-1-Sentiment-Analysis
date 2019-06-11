@@ -143,12 +143,13 @@ for e in embed_sizes:
             if K.backend() == 'tensorflow':
                 K.clear_session()
 
+            total_trained += 1
+
         del model_name
         del model_save_path
         del dense_layers_string
 
         n_trained += 1
-        total_trained += 1
 
 ### Saving all results
 with open(os.path.join(save_dir, "results.json"), 'w') as f:
