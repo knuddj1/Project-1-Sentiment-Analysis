@@ -7,6 +7,7 @@ from load_bert_data import get_data
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Dropout
+from keras import backend as K
     
 ########## Grid Search Parameters #########################
 embed_sizes = [768, 1024] # BERT encoding  size
