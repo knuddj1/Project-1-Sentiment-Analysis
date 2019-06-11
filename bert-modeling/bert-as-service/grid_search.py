@@ -104,7 +104,7 @@ for e in embed_sizes:
 
             test_results = dict()
             for dname, dset in test_sets.items():
-                test_results[dname] = model.evaluate(dset["X_test"], dset["y_test"], verbose=0)[0]
+                test_results[dname] = model.evaluate(dset["X_test"], dset["y_test"], verbose=0)[1]
 
             results_dic = {
                 'acc': history.history['acc'],
