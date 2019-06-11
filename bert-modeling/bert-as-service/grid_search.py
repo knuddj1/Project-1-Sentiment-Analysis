@@ -115,6 +115,20 @@ for e in embed_sizes:
 
         with open(os.path.join(model_save_path,"model_params.json"), 'w') as f:
             json.dump(results_dic, f, indent=4)
+        
+
+        ## Clear memory
+        del model
+        del model_params
+        del model_json
+        del test_results
+        del history
+        del model_name
+        del model_save_path
+        del dense_layers_string
+
+        if K.backend() == 'tensorflow':
+            K.clear_session()
 
 ### Saving all results
 with open(os.path.join(save_dir, "results.json"), 'w') as f:
