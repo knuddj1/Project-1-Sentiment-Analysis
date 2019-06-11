@@ -78,7 +78,7 @@ for e in embed_sizes:
             if total_trained > 0:
                 average = round((time.time()-start) / total_trained, 2)
                 print("Average Model Training Time: {0}".format(average))
-            estimate = datetime.timedelta(seconds=((len(combinations) * 2) - n_trained) * average))
+            estimate = datetime.timedelta(seconds=((len(combinations) * 2) - n_trained) * average)
             print("Estimated Completion Time: {0}".format(estimate)
             print("================================")
             print("Current Model Parameters:")
