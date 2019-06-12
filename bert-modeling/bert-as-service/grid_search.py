@@ -42,7 +42,7 @@ combinations = list(itertools.product(validation_splits, batch_sizes, optimizers
 
 
 ### Verify path to save is correct
-save_dir = ":\grid_search_results"
+save_dir = "F:\grid_search_results"
 if not os.path.isdir(save_dir): os.mkdir(save_dir)
 model_save_dir = os.path.join(save_dir, "models")
 if not os.path.isdir(model_save_dir): os.mkdir(model_save_dir)
