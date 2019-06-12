@@ -135,7 +135,7 @@ for e in embed_sizes:
 
             ## Clear memory
             del model
-            del model_params
+            del compile_params
             del model_json
             del test_results
             del history
