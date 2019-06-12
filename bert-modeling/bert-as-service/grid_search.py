@@ -124,13 +124,13 @@ for e in embed_sizes:
                 json_file.write(model_json)
             model.save_weights(os.path.join(model_save_path,"model.h5"))
 
-            model_params = {
+            compile_params = {
                 "optimizer": opt,
                 "loss_function": "categorical_crossentropy"
             }
 
-            with open(os.path.join(model_save_path,"model_params.json"), 'w') as f:
-                json.dump(results_dic, f, indent=4)
+            with open(os.path.join(model_save_path,"compile_params.json"), 'w') as f:
+                json.dump(compile_params, f, indent=4)
             
 
             ## Clear memory
