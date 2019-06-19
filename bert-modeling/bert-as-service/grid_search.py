@@ -111,10 +111,10 @@ for e in embed_sizes:
                 'val_acc': history.history['val_acc'],
             }
 
-            all_results[model_name] = results_dic
-
             for dname, acc in test_results.items():
                 results_dic[dname] = acc
+				
+			all_results[model_name] = results_dic
 
             with open(os.path.join(model_save_path,'results.json'), 'w') as f:
                 json.dump(results_dic, f, indent=4)
