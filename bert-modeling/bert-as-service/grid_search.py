@@ -42,7 +42,7 @@ combinations = list(itertools.product(validation_splits, batch_sizes, optimizers
 
 
 ### Verify path to save is correct
-save_dir = "R:\grid_search_results"
+save_dir = "F:\grid_search_results"
 if not os.path.isdir(save_dir): os.mkdir(save_dir)
 model_save_dir = os.path.join(save_dir, "models")
 if not os.path.isdir(model_save_dir): os.mkdir(model_save_dir)
@@ -64,7 +64,7 @@ for e in embed_sizes:
         for dl in dls:
             dense_layers_string += "D-{0}".format(dl)
         
-        model_name = "E-{0} VS-{1} BS-{2} OPT-{3} DO-{4} {5}".format(e, vs, bs, opt, do, dense_layers_string)
+        model_name = "E-{0} VS-{1} BS-{2} OPT-{3} DO-{4} ACT-{5} {6}".format(e, vs, bs, opt, do, act, dense_layers_string)
         model_save_path = os.path.join(model_save_dir, model_name)
 
 
@@ -124,18 +124,18 @@ for e in embed_sizes:
                 json_file.write(model_json)
             model.save_weights(os.path.join(model_save_path,"model.h5"))
 
-            model_params = {
+            compile_params = {
                 "optimizer": opt,
                 "loss_function": "categorical_crossentropy"
             }
 
-            with open(os.path.join(model_save_path,"model_params.json"), 'w') as f:
-                json.dump(results_dic, f, indent=4)
+            with open(os.path.join(model_save_path,"compile_params.json"), 'w') as f:
+                json.dump(compile_params, f, indent=4)
             
 
             ## Clear memory
             del model
-            del model_params
+            del compile_params
             del model_json
             del test_results
             del history
