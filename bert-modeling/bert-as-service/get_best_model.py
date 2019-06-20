@@ -20,4 +20,7 @@ with open('all results.csv') as csv_file:
 
 current_dir = os.path.abspath(os.path.dirname(__file__))
 model_dir_path = os.path.join("F:/grid_search_results/models", best_model)
-copy_tree(model_dir_path, current_dir)
+save_dir_name = "best_model"
+if not os.path.isdir(save_dir_name): os.mkdir(save_dir_name)
+save_dir = os.path.join(current_dir, save_dir_name)
+copy_tree(model_dir_path, save_dir)
