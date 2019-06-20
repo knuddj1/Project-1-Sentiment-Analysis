@@ -1,0 +1,4 @@
+{
+    "optimizer": "adam",
+    "loss_function": "categorical_crossentropy"
+}
