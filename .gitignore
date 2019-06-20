@@ -116,4 +116,4 @@ venv.bak/
 *.json
 !baseline_results.csv
 !all\ results.csv
-!best_model/
+!.best_model/*
