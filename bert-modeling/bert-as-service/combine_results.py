@@ -21,7 +21,7 @@ for filename in Path(data_dir).glob('**/results.json'):
 out_dir = PurePath(data_dir,'all results.csv')
 keys = all_results[0].keys()
 
-with open(out_dir, 'w') as f:
+with open(out_dir, 'w', newline='') as f:
     w = csv.DictWriter(f, keys)
     w.writeheader()
     w.writerows(all_results)
